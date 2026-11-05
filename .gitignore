@@ -1,0 +1,5 @@
+# Game files and extracted output are not committed
+*.apk
+apk/
+out/
+__pycache__/
