@@ -9,7 +9,7 @@ def parse(e):
     nc,nr=struct.unpack_from('<HH',e,5)
     if nc==0: return []
     types=list(e[9:9+nc]); p=9+nc
-    if e[p]!=0x48 or any(t not in FMT for t in types): return None
+    if p>=len(e) or e[p]!=0x48 or any(t not in FMT for t in types): return None
     p+=1; rows=[]; rf='<'+''.join(FMT[t] for t in types); rs=struct.calcsize(rf)
     for r in range(nr): rows.append(struct.unpack_from(rf,e,p)); p+=rs
     return dict(types=types,rows=rows,end=p,size=len(e))
